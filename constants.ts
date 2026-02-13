@@ -1,26 +1,27 @@
 import { Prize } from './types';
 
-// Funny commentary for when the boy misses
+// Cute & Flirty commentary for when the boy (Prabhat) misses
 export const BOY_FAIL_COMMENTS = [
   "I think the wind blew it... indoors. 🌬️",
-  "I got lost in your eyes... again. 😍",
-  "My hands are shaking cause you're looking at me. 💓",
-  "Letting you win so you owe me a kiss later. 😉",
-  "Calculated miss... just for the plot. 📉",
-  "I think Cupid nudged the ball away. 💘",
-  "Who put this gutter here?! 🍌",
   "Distracted by your smile! 🙈",
+  "My hands are shaking cause you're looking. 💓",
+  "The floor is definitely uneven here. 🤥",
+  "I swear the lane is tilted! 📐",
+  "Just warming up! Watch out for the next one. 🔥",
+  "Oops! I was aiming for your heart, not the pins. 🎯",
+  "I got lost in your eyes... again. 😍"
 ];
 
-// Cheering for when she wins
+// Cheering commentary for when the girl (Pooja) wins
 export const GIRL_WIN_COMMENTS = [
-  "Okay, are you a secret pro?! 🎳✨",
   "Beauty AND skills? Unfair advantage! 💖",
+  "Okay, are you a secret pro?! 🎳✨",
   "My heart just did a strike too. 💘",
   "Winner gets to pick the date spot! 🏆",
-  "Stop being so cute, I can't concentrate! 🙈",
+  "Stop being so cute, I can't focus! 🙈",
   "You're stealing the show (and my heart)! 💃",
   "Perfect form! (And I don't mean the bowling) 😉",
+  "You make winning look so good! 😍"
 ];
 
 export const FIXED_PRIZE: Prize = {

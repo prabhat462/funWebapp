@@ -3,10 +3,11 @@ import { BOY_FAIL_COMMENTS, GIRL_WIN_COMMENTS } from '../constants';
 
 interface GameScreenProps {
   girlName: string;
+  teamColor: string;
   onFinish: () => void;
 }
 
-export const GameScreen: React.FC<GameScreenProps> = ({ girlName, onFinish }) => {
+export const GameScreen: React.FC<GameScreenProps> = ({ girlName, teamColor, onFinish }) => {
   const [currentFrame, setCurrentFrame] = useState(1);
   const [isPlayerTurn, setIsPlayerTurn] = useState(false); // Start with Boy (CPU)
   const [ballPosition, setBallPosition] = useState(50); // 0 to 100%
@@ -143,45 +144,45 @@ export const GameScreen: React.FC<GameScreenProps> = ({ girlName, onFinish }) =>
           backgroundSize: '30px 30px' 
       }}></div>
 
-      {/* Scoreboard - Updated to match screenshot */}
-      <div className="w-full max-w-lg mt-8 mx-4 z-20">
-        <div className="bg-white/90 backdrop-blur-md rounded-[3rem] shadow-xl border-4 border-white p-3 flex items-center justify-between relative mx-4">
+      {/* Scoreboard - Matched to Screenshot */}
+      <div className="w-full max-w-md mt-10 mx-4 z-20 px-4">
+        <div className="bg-white/70 backdrop-blur-xl rounded-[3rem] shadow-xl border-2 border-white/80 p-4 flex items-center justify-between relative">
             
             {/* Player 1 (Prabhat) */}
-            <div className={`flex flex-col items-center pl-2 transition-opacity duration-300 ${!isPlayerTurn ? 'opacity-100' : 'opacity-60'}`}>
+            <div className="flex flex-col items-center gap-1 min-w-[70px]">
                 <div className="relative">
-                     <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center border-4 border-blue-50 shadow-sm">
+                     <div className="w-16 h-16 bg-blue-100/80 rounded-full flex items-center justify-center border-4 border-white shadow-sm overflow-hidden">
                         <span className="text-3xl">👱‍♂️</span>
                     </div>
                 </div>
-                <div className="mt-1 flex flex-col items-center">
-                    <span className="text-xs font-bold text-blue-400 uppercase tracking-wide">{boyName}</span>
-                    <p className="text-3xl font-bold text-blue-500 leading-none">{boyScore}</p>
+                <div className="flex flex-col items-center -space-y-1">
+                    <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mt-1">{boyName}</span>
+                    <p className="text-3xl font-bold text-blue-500/90">{boyScore}</p>
                 </div>
             </div>
 
             {/* Center Info */}
-            <div className="flex-1 px-2 text-center flex flex-col items-center -mt-6">
-                <div className="bg-[#fff9c4] text-yellow-700 px-8 py-1.5 rounded-full text-xs font-bold tracking-[0.2em] border-2 border-white shadow-sm mb-2 transform translate-y-2">
+            <div className="flex-1 flex flex-col items-center px-2 -mt-6">
+                <div className="bg-[#fde68a] text-[#854d0e] px-5 py-1.5 rounded-full text-[10px] font-bold tracking-[0.2em] shadow-sm mb-1 border border-white/50">
                     FRAME {currentFrame}/3
                 </div>
-                <div className="h-12 flex items-center justify-center w-full">
-                    <p className="text-sm text-pink-500 font-bold leading-tight drop-shadow-sm">
+                <div className="h-14 flex items-center justify-center w-full text-center">
+                    <p className="text-sm text-pink-500 font-bold leading-tight drop-shadow-sm px-1 line-clamp-3">
                         {commentary}
                     </p>
                 </div>
             </div>
 
             {/* Player 2 (Pooja) */}
-             <div className={`flex flex-col items-center pr-2 transition-opacity duration-300 ${isPlayerTurn ? 'opacity-100' : 'opacity-60'}`}>
+             <div className="flex flex-col items-center gap-1 min-w-[70px]">
                 <div className="relative">
-                     <div className="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center border-4 border-pink-50 shadow-sm">
+                     <div className="w-16 h-16 bg-pink-100/80 rounded-full flex items-center justify-center border-4 border-white shadow-sm overflow-hidden">
                         <span className="text-3xl">👱‍♀️</span>
                     </div>
                 </div>
-                <div className="mt-1 flex flex-col items-center">
-                    <span className="text-xs font-bold text-pink-400 uppercase tracking-wide">{girlName}</span>
-                    <p className="text-3xl font-bold text-pink-500 leading-none">{girlScore}</p>
+                <div className="flex flex-col items-center -space-y-1">
+                    <span className="text-[10px] font-bold text-pink-400 uppercase tracking-widest mt-1">{girlName}</span>
+                    <p className="text-3xl font-bold text-pink-500/90">{girlScore}</p>
                 </div>
             </div>
         </div>
@@ -254,7 +255,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({ girlName, onFinish }) =>
         >
              <div className={`w-full h-full rounded-full shadow-xl flex items-center justify-center relative border-4 border-white/20
                 ${isPlayerTurn 
-                    ? 'bg-gradient-to-br from-pink-400 to-rose-500' 
+                    ? `bg-gradient-to-br ${teamColor}` 
                     : 'bg-gradient-to-br from-blue-400 to-indigo-500'}
              `}>
                 <span className="text-2xl opacity-80">{isPlayerTurn ? '💖' : '💨'}</span>
@@ -263,30 +264,34 @@ export const GameScreen: React.FC<GameScreenProps> = ({ girlName, onFinish }) =>
       </div>
 
       {/* Controls */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white p-6 rounded-t-3xl shadow-[0_-5px_20px_rgba(0,0,0,0.05)] border-t border-pink-100 z-40 max-w-md mx-auto">
+      <div className="fixed bottom-0 left-0 right-0 bg-white p-6 rounded-t-[2.5rem] shadow-[0_-5px_30px_rgba(0,0,0,0.08)] border-t border-pink-100 z-40 max-w-md mx-auto">
         {isPlayerTurn && !isRolling ? (
             <div className="w-full text-center">
-                <div className="mb-3 relative">
-                    <p className="text-pink-400 text-xs font-bold mb-1 uppercase tracking-widest">Power Meter</p>
-                    <div className="w-full h-6 bg-pink-100 rounded-full overflow-hidden border-2 border-pink-200 p-1">
+                <div className="mb-4 relative px-4">
+                    <div className="flex justify-between text-[10px] text-pink-300 font-bold uppercase tracking-widest mb-1">
+                        <span>Soft</span>
+                        <span>Power</span>
+                        <span>Strike!</span>
+                    </div>
+                    <div className="w-full h-4 bg-pink-100 rounded-full overflow-hidden border border-pink-200">
                         <div 
-                            className="h-full rounded-full bg-gradient-to-r from-green-300 via-yellow-300 to-red-400 transition-all duration-75"
+                            className="h-full rounded-full bg-gradient-to-r from-green-300 via-yellow-300 to-rose-500 transition-all duration-75"
                             style={{ width: `${power}%` }}
                         ></div>
                     </div>
                 </div>
                 <button 
                     onClick={playUserTurn}
-                    className="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold text-xl py-4 rounded-2xl shadow-lg shadow-pink-200 active:scale-95 transition-all flex items-center justify-center gap-2"
+                    className={`w-full bg-gradient-to-r ${teamColor} text-white font-bold text-xl py-4 rounded-2xl shadow-lg shadow-pink-200 active:scale-95 transition-all flex items-center justify-center gap-2`}
                 >
-                   <span>🎳</span> Roll the Ball!
+                   <span>🎳</span> Take the Shot!
                 </button>
             </div>
         ) : (
             <div className="h-20 flex items-center justify-center">
-                <p className="text-pink-400 animate-pulse font-bold text-lg flex items-center gap-2">
+                <p className="text-pink-400 font-bold text-lg flex items-center gap-3 animate-pulse">
                     {isRolling ? "Rolling..." : "Waiting for opponent..."}
-                    {isRolling && <span className="animate-spin">🍥</span>}
+                    {isRolling && <span className="animate-spin text-2xl">🍥</span>}
                 </p>
             </div>
         )}

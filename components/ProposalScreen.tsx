@@ -9,12 +9,14 @@ export const ProposalScreen: React.FC<ProposalScreenProps> = ({ onSuccess }) => 
   // We use fixed positioning for the 'No' button to move it around
   const [noBtnPos, setNoBtnPos] = useState({ top: '60%', left: '60%' });
   const [hoverCount, setHoverCount] = useState(0);
+  const [yesScale, setYesScale] = useState(1);
 
   const moveButton = () => {
     const randomTop = Math.floor(Math.random() * 80) + 10; // 10% to 90%
     const randomLeft = Math.floor(Math.random() * 80) + 10;
     setNoBtnPos({ top: `${randomTop}%`, left: `${randomLeft}%` });
     setHoverCount(prev => prev + 1);
+    setYesScale(prev => prev + 0.15); // Grow by 15% each time
   };
 
   const handleYes = () => {
@@ -63,7 +65,8 @@ export const ProposalScreen: React.FC<ProposalScreenProps> = ({ onSuccess }) => 
       <div className="flex gap-8 items-center justify-center z-20">
         <button
           onClick={handleYes}
-          className="px-10 py-4 bg-green-500 hover:bg-green-600 text-white text-2xl font-bold rounded-full shadow-lg transform transition-transform hover:scale-110"
+          style={{ transform: `scale(${yesScale})` }}
+          className="px-10 py-4 bg-green-500 hover:bg-green-600 text-white text-2xl font-bold rounded-full shadow-lg transition-transform duration-200"
         >
           YES! 😍
         </button>

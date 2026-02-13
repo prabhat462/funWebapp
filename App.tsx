@@ -11,11 +11,12 @@ import { SuccessScreen } from './components/SuccessScreen';
 function App() {
   const [state, setState] = useState<AppState>(AppState.INTRO);
   const [girlName, setGirlName] = useState('Pooja'); 
+  const [teamColor, setTeamColor] = useState('from-pink-400 to-rose-500');
   
   const handleStart = () => setState(AppState.SETUP);
 
-  // SetupScreen is now an animation, just transitions to Game
-  const handleSetupComplete = (name: string, mem: string) => {
+  const handleSetupComplete = (name: string, mem: string, color: string) => {
+    setTeamColor(color);
     setState(AppState.GAME);
   };
 
@@ -34,7 +35,7 @@ function App() {
     <div className="antialiased text-slate-800 font-quicksand">
       {state === AppState.INTRO && <IntroScreen onStart={handleStart} />}
       {state === AppState.SETUP && <SetupScreen onComplete={handleSetupComplete} />}
-      {state === AppState.GAME && <GameScreen girlName={girlName} onFinish={handleGameFinish} />}
+      {state === AppState.GAME && <GameScreen girlName={girlName} teamColor={teamColor} onFinish={handleGameFinish} />}
       {state === AppState.REVEAL && (
         <RevealScreen prize={FIXED_PRIZE} onNext={handleClaimPrize} />
       )}
