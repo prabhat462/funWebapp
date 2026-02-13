@@ -2,6 +2,7 @@ import { Prize } from './types';
 
 // Funny commentary for when the boy misses
 export const BOY_FAIL_COMMENTS = [
+  "I think the wind blew it... indoors. 🌬️",
   "I got lost in your eyes... again. 😍",
   "My hands are shaking cause you're looking at me. 💓",
   "Letting you win so you owe me a kiss later. 😉",
